@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koki&Muryn</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact h3 {
+      margin-bottom: 10px;
+    }
+
+    .contact img {
+      width: 150px;
+      height: auto;
+      float: left;
+      margin-right: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      var menuItems = document.getElementsByClassName("menu-item");
+
+      for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].addEventListener("click", function() {
+          var current = document.getElementsByClassName("active");
+          if (current.length > 0) {
+            current[0].classList.remove("active");
+          }
+          this.classList.add("active");
+        });
+      }
+    };
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Koki&Muryn</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index.html#">Strona główna</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index2.html">Oferta</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index4.html">Koszyk</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index5.html" class="menu-item active">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="contact">
+      <h2>Kontakt</h2>
+      <h3>Numer telefonu: 533 198 657</h3>
+      <h3>Mail: gibimaly1@gmail.com</h3>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2023 Koki&Muryn. Wszelkie prawa zastrzeżone.</p>
+  </footer>
+</body>
+</html>

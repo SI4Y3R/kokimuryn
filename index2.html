@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koki&Muryn - Oferta</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .product-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .product-card p {
+      margin-bottom: 5px;
+    }
+
+    .product-card input {
+      margin-bottom: 10px;
+    }
+
+    .product-card button {
+      padding: 10px 20px;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      var menuItems = document.getElementsByClassName("menu-item");
+
+      for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].addEventListener("click", function() {
+          var current = document.getElementsByClassName("active");
+          if (current.length > 0) {
+            current[0].classList.remove("active");
+          }
+          this.classList.add("active");
+        });
+      }
+    };
+
+    function addToCart(product) {
+      var quantity = parseInt(document.getElementById("quantity-" + product.id).value);
+      if (isNaN(quantity) || quantity <= 0) {
+        alert("Podaj prawidłową ilość przedmiotów.");
+        return;
+      }
+
+      var cart = JSON.parse(localStorage.getItem("cart")) || [];
+      for (var i = 0; i < quantity; i++) {
+        cart.push(product);
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function removeFromCart(index) {
+      var cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function displayCart() {
+      var cart = JSON.parse(localStorage.getItem("cart")) || [];
+      var cartItems = document.getElementById("cartItems");
+      cartItems.innerHTML = "";
+
+      for (var i = 0; i < cart.length; i++) {
+        var product = cart[i];
+        var listItem = document.createElement("li");
+        listItem.innerHTML = product.name + " - " + product.price + " zł";
+        listItem.innerHTML += '<button onclick="removeFromCart(' + i + ')">Usuń</button>';
+        cartItems.appendChild(listItem);
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Koki&Muryn</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index.html#">Strona główna</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index2.html">Oferta</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index4.html">Koszyk</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index5.html">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <ul id="cartItems"></ul>
+
+  <main>
+    <section class="products">
+      <h2>Nasza oferta</h2>
+      <div class="product-list">
+        <div class="product-card">
+          <img src="prog.png" alt="Programowanie" class="prog">
+          <h3>Pisanie stron internetowych</h3>
+          <p class="price">Cena: do uzgodnienia</p>
+          <label for="quantity-strona">Ilość:</label>
+          <input type="number" id="quantity-strona" min="1" value="1">
+          <button onclick="addToCart({ id: 'strona', name: 'Pisanie stron internetowych', price: 'do uzgodnienia' })">Dodaj do koszyka</button>
+        </div>
+
+        <div class="product-card">
+          <img src="csgo.jpg" alt="CSGO" class="csgo">
+          <h3>Boosting rang CSGO</h3>
+          <p class="price">Cena: 20 PLN</p>
+          <label for="quantity-csgo">Ilość:</label>
+          <input type="number" id="quantity-csgo" min="1" value="1">
+          <button onclick="addToCart({ id: 'csgo', name: 'Boosting rang CSGO', price: '20 PLN' })">Dodaj do koszyka</button>
+        </div>
+
+        <div class="product-card">
+          <img src="windows.jpg" alt="Windows" class="windows">
+          <h3>Optymalizacja systemu Windows pod wydajność</h3>
+          <p class="price">Cena: 150 PLN</p>
+          <label for="quantity-windows">Ilość:</label>
+          <input type="number" id="quantity-windows" min="1" value="1">
+          <button onclick="addToCart({ id: 'windows', name: 'Optymalizacja systemu Windows pod wydajność', price: '150 PLN' })">Dodaj do koszyka</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Koki&Muryn. Wszelkie prawa zastrzeżone.</p>
+  </footer>
+</body>
+</html>

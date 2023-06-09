@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koki&Muryn - Koszyk</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cart {
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+    }
+
+    .cart h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cart ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cart li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .cart li:last-child {
+      border-bottom: none;
+    }
+
+    .cart button {
+      padding: 5px 10px;
+    }
+
+    .total {
+      text-align: right;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .item-count {
+      margin-left: 10px;
+      background-color: #ccc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+  </style>
+  <script>
+    function addToCart(product) {
+      var cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      displayCart();
+    }
+
+    function removeFromCart(index) {
+      var cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      displayCart();
+    }
+
+    function displayCart() {
+      var cart = JSON.parse(localStorage.getItem("cart")) || [];
+      var cartItems = document.getElementById("cartItems");
+      cartItems.innerHTML = "";
+
+      var total = 0;
+      var itemCounts = {}; // Obiekt do przechowywania ilości przedmiotów
+
+      for (var i = 0; i < cart.length; i++) {
+        var product = cart[i];
+        var listItem = document.createElement("li");
+        listItem.innerHTML = product.name + '<span class="item-count">(x1)</span>' + " - " + product.price + " zł";
+        listItem.innerHTML += '<button onclick="removeFromCart(' + i + ')">Usuń</button>';
+        cartItems.appendChild(listItem);
+
+        var price = parseFloat(product.price);
+        if (!isNaN(price)) {
+          total += price;
+          // Inkrementuj licznik dla danego produktu
+          itemCounts[product.name] = (itemCounts[product.name] || 0) + 1;
+        }
+      }
+
+      var totalElement = document.getElementById("total");
+      totalElement.innerHTML = "Razem: " + total.toFixed(2) + " zł";
+
+      // Wyświetl ilość przedmiotów obok ich nazwy
+      var items = cartItems.getElementsByTagName("li");
+      for (var j = 0; j < items.length; j++) {
+        var itemName = items[j].innerText.split(" - ")[0];
+        if (itemCounts[itemName] > 1) {
+          items[j].querySelector(".item-count").textContent = "(x" + itemCounts[itemName] + ")";
+        }
+      }
+    }
+
+    window.onload = function() {
+      var menuItems = document.getElementsByClassName("menu-item");
+
+      for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].addEventListener("click", function() {
+          var current = document.getElementsByClassName("active");
+          if (current.length > 0) {
+            current[0].classList.remove("active");
+          }
+          this.classList.add("active");
+        });
+      }
+
+      displayCart();
+    };
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Koki&Muryn</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index.html#">Strona główna</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index2.html">Oferta</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index4.html" class="menu-item active">Koszyk</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index5.html">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="cart">
+    <h2>Koszyk</h2>
+    <ul id="cartItems"></ul>
+    <p class="total" id="total"></p>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2023 Koki&Muryn. Wszelkie prawa zastrzeżone.</p>
+  </footer>
+</body>
+</html>

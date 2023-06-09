@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koki&Muryn</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    
+    .koki {
+      display: block;
+      margin: 20px auto;
+      max-width: 300px;
+    }
+
+    .main-content {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      var menuItems = document.getElementsByClassName("menu-item");
+
+      for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].addEventListener("click", function() {
+          var current = document.getElementsByClassName("active");
+          if (current.length > 0) {
+            current[0].classList.remove("active");
+          }
+          this.classList.add("active");
+        });
+      }
+    };
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Koki&Muryn</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index.html" class="menu-item active">Strona główna</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index2.html">Oferta</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index4.html">Koszyk</a></li>
+        <li><a href="file:///C:/Users/Administrator/Desktop/strony/index5.html">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <img src="kokinmuryn.jpg" alt="kokilogo" class="koki">
+    <div class="main-content">
+      <h4>Koki&Muryn to sklep online, w którym nie tylko kupisz przedmioty taniej, ale dzięki dobrej jakości przedmiotów ładnie zaprezentujesz je na swoim stole, szafce bądź oknie. Sklep ten wyróżnia się niskimi cenami i dobrym kontaktem między kupującym a sprzedawcą. Strona Koki&Muryn.pl nie jest tylko sklepem online, lecz tutaj także znajdziesz informacje odnośnie współpracy z założycielem strony, który na zamówienie stworzy dla Ciebie na przykład stronę internetową z uwzględnieniem Twoich własnych preferencji.</h4>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2023 Koki&Muryn. Wszelkie prawa zastrzeżone.</p>
+  </footer>
+</body>
+</html>
